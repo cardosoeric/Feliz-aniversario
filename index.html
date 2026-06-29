@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Um presente digital de aniversário romântico, interativo e feito com carinho.">
+  <title>Feliz Aniversário, Meu Amor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="loading">
+  <div class="loading-screen" id="loadingScreen" aria-live="polite">
+    <div class="loader-scene" aria-hidden="true">
+      <div class="loader-cake">
+        <span class="loader-flame"></span>
+        <span class="loader-candle"></span>
+        <span class="loader-layer top"></span>
+        <span class="loader-layer bottom"></span>
+      </div>
+      <div class="loader-sparkles">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <p>Preparando uma surpresa feita só para você...</p>
+  </div>
+
+  <canvas id="magicCanvas" class="magic-canvas" aria-hidden="true"></canvas>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="ambient-lights" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="decor-layer" id="decorLayer" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#inicio" aria-label="Voltar ao início">
+      <span class="brand-mark" aria-hidden="true">♥</span>
+      <span>Nosso Dia</span>
+    </a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#mensagem">Mensagem</a>
+      <a href="#fotos">Fotos</a>
+      <a href="#memorias">Memórias</a>
+      <a href="#carta">Carta</a>
+      <a href="#surpresa">Surpresa</a>
+    </nav>
+    <button class="icon-button music-toggle" id="musicToggle" type="button" aria-label="Tocar música romântica" title="Tocar música">
+      <span class="music-icon" aria-hidden="true"></span>
+      <span class="music-label">Tocar música</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero section" id="inicio" aria-labelledby="heroTitle">
+      <div class="hero-visual" aria-hidden="true">
+        <div class="moon-glow"></div>
+        <div class="cake-scene">
+          <div class="cake">
+            <span class="candle flame-one"></span>
+            <span class="candle flame-two"></span>
+            <span class="cake-top"></span>
+            <span class="cake-mid"></span>
+            <span class="cake-base"></span>
+            <span class="cake-plate"></span>
+          </div>
+        </div>
+        <div class="balloon b1"></div>
+        <div class="balloon b2"></div>
+        <div class="balloon b3"></div>
+      </div>
+      <div class="hero-content">
+        <p class="eyebrow reveal">Um presente para o seu coração</p>
+        <h1 id="heroTitle" class="hero-title reveal">Feliz Aniversário, Meu Amor</h1>
+        <p class="hero-subtitle reveal">Hoje o mundo fica mais bonito, porque celebra a vida da pessoa que ilumina os meus dias.</p>
+        <a class="primary-button reveal" href="#mensagem">
+          <span>Começar Nossa História</span>
+          <span class="button-shine" aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="hero-bottom-hint" aria-hidden="true"></div>
+    </section>
+
+    <section class="section love-message" id="mensagem" aria-labelledby="mensagemTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Mensagem especial</p>
+        <h2 id="mensagemTitle">Para a mulher que transforma tudo em amor</h2>
+      </div>
+      <div class="message-wrap">
+        <p class="message-line reveal">Meu amor, hoje é o seu dia, mas quem se sente presenteado sou eu por poder caminhar ao seu lado. A sua existência tem um jeito raro de deixar a vida mais leve, mais bonita e mais cheia de sentido.</p>
+        <p class="message-line reveal">Eu admiro a sua força, a sua doçura, o seu cuidado e essa luz que aparece até nos detalhes mais simples. Você tem um coração que acolhe, um sorriso que acalma e uma presença que faz qualquer momento parecer especial.</p>
+        <p class="message-line reveal">Neste aniversário, eu desejo que você receba todo o amor que entrega ao mundo. Que cada sonho encontre caminho, que cada plano ganhe coragem e que a felicidade te abrace com a mesma delicadeza com que você abraça a minha vida.</p>
+        <p class="message-line reveal">Obrigado por ser você. Obrigado por estar comigo. Obrigado por me mostrar, todos os dias, que o amor também mora nas pequenas coisas.</p>
+      </div>
+    </section>
+
+    <section class="section photo-gallery" id="fotos" aria-labelledby="fotosTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Nossas imagens</p>
+        <h2 id="fotosTitle">Galeria de lembranças</h2>
+        <p>Doze molduras prontas para receber os nossos momentos favoritos.</p>
+      </div>
+      <div class="gallery-toolbar reveal" aria-label="Controles da galeria">
+        <button class="soft-button active" id="masonryMode" type="button">Modo mural</button>
+        <button class="soft-button" id="carouselMode" type="button">Modo carrossel</button>
+      </div>
+      <!-- Para personalizar, substitua os arquivos assets/foto-01.svg ate assets/foto-12.svg pelas fotos reais. -->
+      <div class="gallery-grid" id="galleryGrid">
+        <figure class="photo-card tall reveal" data-index="0">
+          <img loading="lazy" src="assets/foto-01.jpg" alt="Nossa foto um">
+          <figcaption>Foto 01</figcaption>
+        </figure>
+        <figure class="photo-card reveal" data-index="1">
+          <img loading="lazy" src="assets/foto-02.jpg" alt="Nossa foto dois">
+          <figcaption>Foto 02</figcaption>
+        </figure>
+        <figure class="photo-card wide reveal" data-index="2">
+          <img loading="lazy" src="assets/foto-03.jpg" alt="Nossa foto três">
+          <figcaption>Foto 03</figcaption>
+        </figure>
+        <figure class="photo-card reveal" data-index="3">
+          <img loading="lazy" src="assets/foto-04.jpg" alt="Nossa foto quatro">
+          <figcaption>Foto 04</figcaption>
+        </figure>
+        <figure class="photo-card tall reveal" data-index="4">
+          <img loading="lazy" src="assets/foto-05.jpg" alt="Nossa foto cinco">
+          <figcaption>Foto 05</figcaption>
+        </figure>
+        <figure class="photo-card reveal" data-index="5">
+          <img loading="lazy" src="assets/foto-06.jpg" alt="Nossa foto seis">
+          <figcaption>Foto 06</figcaption>
+        </figure>
+        <figure class="photo-card reveal" data-index="6">
+          <img loading="lazy" src="assets/foto-07.jpg" alt="Nossa foto sete">
+          <figcaption>Foto 07</figcaption>
+        </figure>
+        <figure class="photo-card wide reveal" data-index="7">
+          <img loading="lazy" src="assets/foto-08.jpg" alt="Nossa foto oito">
+          <figcaption>Foto 08</figcaption>
+        </figure>
+        <figure class="photo-card reveal" data-index="8">
+          <img loading="lazy" src="assets/foto-9.jpg" alt="Moldura para a foto nove">
+          <figcaption>Foto 09</figcaption>
+        </figure>
+        <figure class="photo-card tall reveal" data-index="9">
+          <img loading="lazy" src="assets/foto-10.jpg" alt="Moldura para a foto dez">
+          <figcaption>Foto 10</figcaption>
+        </figure>
+        <figure class="photo-card reveal" data-index="10">
+          <img loading="lazy" src="assets/foto-11.jpg" alt="Moldura para a foto onze">
+          <figcaption>Foto 11</figcaption>
+        </figure>
+        <figure class="photo-card wide reveal" data-index="11">
+          <img loading="lazy" src="assets/foto-12.jpg" alt="Moldura para a foto doze">
+          <figcaption>Foto 12</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section memories" id="memorias" aria-labelledby="memoriasTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Capítulos favoritos</p>
+        <h2 id="memoriasTitle">Memórias especiais</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <h3>O dia em que nos conhecemos</h3>
+          <p>Um começo simples, bonito e cheio daquela sensação de que algo importante estava nascendo.</p>
+        </article>
+        <article class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <h3>Nosso primeiro encontro</h3>
+          <p>O tempo pareceu ganhar outro ritmo, e cada conversa virou uma lembrança que eu guardo com carinho.</p>
+        </article>
+        <article class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <h3>O pedido de namoro</h3>
+          <p>Um sim que ficou marcado no coração e abriu espaço para uma história que eu amo viver.</p>
+        </article>
+        <article class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <h3>Nossas maiores alegrias</h3>
+          <p>Risadas, abraços, conversas longas e pequenos instantes que se tornaram gigantes dentro de mim.</p>
+        </article>
+        <article class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <h3>Nossas aventuras</h3>
+          <p>Cada caminho fica melhor quando é com você, porque até o improviso vira uma memória preciosa.</p>
+        </article>
+        <article class="timeline-item reveal">
+          <span class="timeline-dot"></span>
+          <h3>Os sonhos que ainda vamos viver</h3>
+          <p>Viagens, conquistas, planos e muitos aniversários para celebrar de mãos dadas.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section special-reasons" id="motivos" aria-labelledby="motivosTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Pequenos milagres</p>
+        <h2 id="motivosTitle">Razões pelas quais você é especial</h2>
+      </div>
+      <div class="reason-grid">
+        <article class="reason-card reveal" tabindex="0">
+          <div class="reason-inner">
+            <div class="reason-front"><span>Seu sorriso</span></div>
+            <div class="reason-back"><p>Ele muda o clima do meu dia e me lembra que a vida pode ser doce.</p></div>
+          </div>
+        </article>
+        <article class="reason-card reveal" tabindex="0">
+          <div class="reason-inner">
+            <div class="reason-front"><span>Seu carinho</span></div>
+            <div class="reason-back"><p>Você cuida com uma delicadeza que faz qualquer coração se sentir em casa.</p></div>
+          </div>
+        </article>
+        <article class="reason-card reveal" tabindex="0">
+          <div class="reason-inner">
+            <div class="reason-front"><span>Seu jeito</span></div>
+            <div class="reason-back"><p>Único, encantador e cheio de verdade, exatamente como tudo que vem de você.</p></div>
+          </div>
+        </article>
+        <article class="reason-card reveal" tabindex="0">
+          <div class="reason-inner">
+            <div class="reason-front"><span>Seu abraço</span></div>
+            <div class="reason-back"><p>É meu lugar favorito para desacelerar o mundo e encontrar paz.</p></div>
+          </div>
+        </article>
+        <article class="reason-card reveal" tabindex="0">
+          <div class="reason-inner">
+            <div class="reason-front"><span>Sua companhia</span></div>
+            <div class="reason-back"><p>Com você, até os dias comuns ganham brilho de ocasião especial.</p></div>
+          </div>
+        </article>
+        <article class="reason-card reveal" tabindex="0">
+          <div class="reason-inner">
+            <div class="reason-front"><span>Seu coração</span></div>
+            <div class="reason-back"><p>Bonito, generoso e imenso. Um presente que eu tenho a sorte de conhecer.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section letter-section" id="carta" aria-labelledby="cartaTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Carta de amor</p>
+        <h2 id="cartaTitle">Uma carta para guardar</h2>
+      </div>
+      <article class="love-letter reveal">
+        <p class="letter-greeting">Meu amor,</p>
+        <p class="handwriting" id="handwritingText">Se eu pudesse embrulhar em palavras tudo o que sinto por você, ainda assim faltaria espaço. Neste aniversário, quero que você se enxergue como eu te vejo: linda, forte, rara, luminosa e merecedora de um mundo inteiro de felicidade. Que seu novo ciclo venha com calma no coração, coragem nos sonhos e amor em todos os caminhos. Eu te amo com admiração, cuidado e a certeza bonita de querer estar ao seu lado em muitos capítulos ainda.</p>
+        <p class="letter-signature">Com todo o meu amor.</p>
+      </article>
+    </section>
+
+    <section class="section birthday-wishes" id="desejos" aria-labelledby="desejosTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Parabéns, minha vida</p>
+        <h2 id="desejosTitle">Que o seu novo ciclo seja inesquecível</h2>
+      </div>
+      <div class="wish-stage reveal">
+        <div class="wish-cake" aria-hidden="true">
+          <span class="wish-candle"></span>
+          <span class="wish-flame"></span>
+          <span class="wish-tier tier-one"></span>
+          <span class="wish-tier tier-two"></span>
+          <span class="wish-tier tier-three"></span>
+        </div>
+        <p>Que nunca faltem saúde, paz, sucesso, amor, viagens lindas, conquistas merecidas e momentos que façam seus olhos brilharem. Que você celebre este dia sentindo o quanto é amada, admirada e essencial.</p>
+      </div>
+    </section>
+
+    <section class="section future" id="futuro" aria-labelledby="futuroTitle">
+      <div class="section-heading reveal">
+        <p class="eyebrow">O que ainda vem</p>
+        <h2 id="futuroTitle">Nosso futuro</h2>
+      </div>
+      <div class="future-grid">
+        <article class="future-card reveal">
+          <h3>Viagens sonhadas</h3>
+          <p>Quero conhecer novos lugares com você, guardar bilhetes, colecionar fotos e voltar para casa com histórias que só nós entenderemos.</p>
+        </article>
+        <article class="future-card reveal">
+          <h3>Conquistas lado a lado</h3>
+          <p>Quero aplaudir suas vitórias, apoiar seus recomeços e ver você florescer em tudo aquilo que escolher viver.</p>
+        </article>
+        <article class="future-card reveal">
+          <h3>Muitos aniversários juntos</h3>
+          <p>Que este seja apenas um dos muitos dias em que eu vou te lembrar o quanto a sua vida é preciosa para mim.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section final-surprise" id="surpresa" aria-labelledby="surpresaTitle">
+      <div class="final-content reveal">
+        <p class="eyebrow">Surpresa final</p>
+        <h2 id="surpresaTitle">Um último brilho para o seu dia</h2>
+        <p>Guarde este instante no coração. Ele foi feito para celebrar você.</p>
+        <button class="primary-button final-button" id="finalButton" type="button">
+          <span>Revelar Minha Surpresa</span>
+          <span class="button-shine" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="final-message" id="finalMessage" role="status" aria-live="polite">
+        <h3>Feliz aniversário, meu amor!</h3>
+        <p>Que este seja apenas mais um dos muitos aniversários que teremos juntos. Obrigado por fazer parte da minha vida. Eu te amo infinitamente.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Feito com amor para celebrar a pessoa que deixa a minha vida mais bonita.</p>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo" title="Voltar ao topo">
+    <span aria-hidden="true">↑</span>
+  </button>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Foto ampliada">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Fechar foto ampliada">×</button>
+    <button class="lightbox-nav prev" id="lightboxPrev" type="button" aria-label="Foto anterior">‹</button>
+    <img id="lightboxImage" alt="Foto ampliada da nossa galeria">
+    <button class="lightbox-nav next" id="lightboxNext" type="button" aria-label="Próxima foto">›</button>
+    <p id="lightboxCaption"></p>
+  </div>
+
+  <div class="easter-egg" id="easterEgg" role="status" aria-live="polite">
+    <p>Você encontrou um segredo: eu escolheria você de novo, em todos os dias.</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
